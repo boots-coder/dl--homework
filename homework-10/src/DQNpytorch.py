@@ -114,7 +114,7 @@ def main():
         if memory.size() > 2000:  # Start training after the buffer has enough samples
             train(q, q_target, memory, optimizer)
 
-        if episode_score > 200:  # Save the model if the episode score is greater than 200
+        if episode_score > 200 and episode_score < 1000:  # Save the model if the episode score is greater than 200
             torch.save(q.state_dict(), f"cartpole_model_{n_epi}.pth")
             print(f"Model saved at episode {n_epi} with score {episode_score}")
 

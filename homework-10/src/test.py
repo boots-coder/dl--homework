@@ -21,7 +21,7 @@ class Qnet(nn.Module):
 
 # 加载训练好的模型
 model = Qnet()
-model.load_state_dict(torch.load('cartpole_model_613.pth'))  # 将 xxxx 替换为实际保存的模型文件名
+model.load_state_dict(torch.load('../model/cartpole_model_613.pth'))  # 将 xxxx 替换为实际保存的模型文件名
 model.eval()  # 将模型设置为评估模式
 
 # 创建CartPole-v1环境
