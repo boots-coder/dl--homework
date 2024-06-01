@@ -38,7 +38,16 @@ model.compile(
     loss='sparse_categorical_crossentropy',  # 使用稀疏分类交叉熵损失函数
     metrics=['accuracy']  # 使用准确率作为评估指标
 )
-
+# model.compile(
+#     optimizer='sgd',  # 使用随机梯度下降 (SGD) 优化器
+#     loss='mean_squared_error',  # 使用均方误差 (MSE) 损失函数
+#     metrics=['mae', 'AUC', ]  # 使用平均绝对误差 (MAE) 作为评估指标
+# )
+# model.compile(
+#     optimizer='rmsprop',  # 使用 RMSprop 优化器
+#     loss='binary_crossentropy',  # 使用二分类交叉熵损失函数
+#     metrics=['accuracy', 'Precision']  # 使用准确率和精确率作为评估指标
+# )
 # train
 
 model.fit(x_train, y_train, epochs=5)
