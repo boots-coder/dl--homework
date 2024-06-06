@@ -34,9 +34,9 @@ model = models.Sequential([
     tf.keras.layers.MaxPooling2D((2, 2), strides=2, name="S6"),  # 池化层2(S6)，2x2采样
     tf.keras.layers.Dropout(rate=0.25, name='drop3'),  # dropout
 
-    tf.keras.layers.Conv2D(128, (5, 5), activation='relu', padding="SAME", name="C7"),  # 卷积层2(C7)，卷积核5x5
-    tf.keras.layers.MaxPooling2D((2, 2), strides=2, name="S8"),  # 池化层2(S8)，2x2采样
-    tf.keras.layers.Dropout(rate=0.25, name='drop4'),  # dropout
+    # tf.keras.layers.Conv2D(128, (5, 5), activation='relu', padding="SAME", name="C7"),  # 卷积层2(C7)，卷积核5x5
+    # tf.keras.layers.MaxPooling2D((2, 2), strides=2, name="S8"),  # 池化层2(S8)，2x2采样
+    # tf.keras.layers.Dropout(rate=0.25, name='drop4'),  # dropout
 
     tf.keras.layers.Flatten(),  # Flatten层，连接卷积层与全连接层
     tf.keras.layers.Dense(128, activation='relu', name="F9"),  # 全连接层，特征进一步提取
@@ -45,3 +45,20 @@ model = models.Sequential([
 
 # 打印网络结构
 model.summary()
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+x_train = x_train / 255.0
+x_test = x_test / 255.0
+x_train = tf.reshape(x_train, (60000, 28, 28, 1))
+x_test = tf.reshape(x_test, (10000, 28, 28, 1))
+
+model.fit(
+    x_train, y_train, epochs=5,
+    verbose=2
+)
+
+scores = model.evaluate(x_test, y_test, verbose=2)
+print("Accuracy: %.2f%%" % (scores[1] * 100))
+print("Loss: %.2f" % scores[0])
